@@ -1,0 +1,13 @@
+market: crypto
+session: "24x7, venue-specific maintenance"
+t_plus: 0
+price_limit: none
+short_allowed: venue_specific
+lot_rules: "min notional / min size per venue"
+cost_assumptions:
+  commission: null
+  slippage: null
+param_overrides: {}
+forbidden: []
+suitability: recommended
+suitability_reason: ""

@@ -1,0 +1,20 @@
+market: a_share
+session: "连续竞价 09:30-11:30, 13:00-15:00；日线对齐"
+t_plus: 1
+price_limit: "主板常见 ±10%；创业板/科创板常见 ±20%；ST 更窄。触及涨跌停时入场/加仓/止损可能无法成交"
+short_allowed: false
+lot_rules: "100 股整数倍；停牌日跳过信号"
+cost_assumptions:
+  commission: 0.001
+  slippage: 0.001
+param_overrides:
+  T: 20
+  frequency: 1d
+  unit_risk_fraction: 0.01
+forbidden:
+  - sell_same_calendar_day_as_buy
+  - overnight_short
+  - ignore_limit_lock
+  - trade_st_or_halted_without_filter
+suitability: needs_param_change
+suitability_reason: T+1 使当日止损无法卖出；涨跌停会打断突破成交。实现必须把卖出推迟到下一交易日，并处理未完成止损。默认不推荐用 60 分钟版海龟。

@@ -1,0 +1,28 @@
+id: example
+title: 示例策略
+style: trend  # trend | mean_reversion | allocation | conditional_order
+quality: usable_skeleton  # usable_skeleton | teaching_template | indicator_misuse
+intent: 一句话说明这个规则在赌什么
+indicators:
+  - name: ""
+    inputs: [open, high, low, close, volume]
+    window: 0
+    formula: ""
+signals:
+  entry: ""
+  exit: ""
+  add: ""
+  ignore: ""
+position:
+  kind: unit  # all_in | unit | target_weight
+  sizing: ""
+stops:
+  price: ""
+  account_drawdown: ""
+  halt: ""
+params: {}
+failure_modes: []
+known_bugs: []
+source_kind: legacy  # legacy | distilled
+legacy_files: []
+markets_supported: []  # subset of crypto, a_share, hk, us

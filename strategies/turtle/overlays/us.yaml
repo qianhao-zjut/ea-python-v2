@@ -1,0 +1,17 @@
+market: us
+session: "09:30-16:00 ET regular session; this pack uses daily bars, no overnight session logic"
+t_plus: 1
+price_limit: none
+short_allowed: false
+lot_rules: "1 share; PDT and locate do not apply if cash long-only"
+cost_assumptions:
+  commission: 0.0
+  slippage: 0.001
+param_overrides:
+  T: 20
+  frequency: 1d
+forbidden:
+  - invent_short_side
+  - treat_as_24x7
+suitability: recommended
+suitability_reason: 日线突破与单位仓可直接翻译。本包不做盘前盘后。T+1 结算占用资金，但不禁止当日卖出已持仓股份。

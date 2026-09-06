@@ -1,0 +1,13 @@
+market: us
+session: "regular session 09:30-16:00 ET unless specified"
+t_plus: 1
+price_limit: none
+short_allowed: "locate/borrow required; default cash long-only unless specified"
+lot_rules: "fractional optional in some venues; otherwise 1 share"
+cost_assumptions:
+  commission: null
+  slippage: null
+param_overrides: {}
+forbidden: []
+suitability: needs_param_change
+suitability_reason: ""

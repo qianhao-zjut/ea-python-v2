@@ -1,0 +1,13 @@
+market: hk
+session: "HKEX cash session plus lunch break"
+t_plus: 2
+price_limit: none
+short_allowed: "subject to uptick and borrow; default cash long-only unless specified"
+lot_rules: "board lot per name"
+cost_assumptions:
+  commission: null
+  slippage: null
+param_overrides: {}
+forbidden: []
+suitability: needs_param_change
+suitability_reason: ""

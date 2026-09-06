@@ -1,0 +1,16 @@
+market: crypto
+session: 24x7
+t_plus: 0
+price_limit: none
+short_allowed: false
+lot_rules: "min notional per venue; legacy used HUOBI_CNY_BTC min cash/qty constants"
+cost_assumptions:
+  commission: 0.002
+  slippage: 0.001
+param_overrides:
+  T: 20
+  frequency: 1d
+forbidden:
+  - invent_short_side
+suitability: recommended
+suitability_reason: 与 legacy 教学标的一致，24x7 且 T+0，加仓/止损可在后续 bar 执行

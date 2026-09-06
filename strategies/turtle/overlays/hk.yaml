@@ -1,0 +1,17 @@
+market: hk
+session: "09:30-12:00, 13:00-16:00 HKT"
+t_plus: 2
+price_limit: none
+short_allowed: false
+lot_rules: "每只股票有 board lot；不足一手通常不能按本包单位仓直接下单，需向下取整到手数"
+cost_assumptions:
+  commission: 0.001
+  slippage: 0.001
+param_overrides:
+  T: 20
+  frequency: 1d
+forbidden:
+  - invent_short_side
+  - ignore_board_lot
+suitability: needs_param_change
+suitability_reason: 无涨跌停更接近原通道逻辑，但手数与印花税会扭曲小单位仓。现金账户按只做多实现。T+2 影响资金占用，不阻止当日卖出已持仓股份（与 A 股 T+1 不同）。

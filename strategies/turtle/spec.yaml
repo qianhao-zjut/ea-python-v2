@@ -1,0 +1,65 @@
+id: turtle
+title: 海龟
+style: trend
+quality: usable_skeleton
+intent: 价格突破近 T 根最高价做多跟随趋势；用净值 1%/ATR 作单位仓，上涨加仓，通道下沿或 2ATR 止损离场
+indicators:
+  - name: donchian_entry
+    inputs: [high]
+    window: 20
+    formula: up = max(high[-T:]) on bars excluding current incomplete bar
+  - name: donchian_exit
+    inputs: [low]
+    window: 10
+    formula: down = min(low[-T/2:]) on bars excluding current incomplete bar; T/2 uses integer division
+  - name: ATR
+    inputs: [high, low, close]
+    window: all_available_hist
+    formula: |
+      For each i in hist used for ATR (legacy uses hist without the last row):
+        TR_i = max(H_i - L_i, H_i - C_{i-1}, C_{i-1} - L_i)
+      ATR = mean(all TR_i)
+      When i=0, C_{i-1} is the last close in that array (Python negative index wrap).
+signals:
+  entry: "flat AND price > donchian_entry → enter 1 unit"
+  exit: "in position AND price < donchian_exit → flatten and reset state"
+  add: "in position AND add_count < limit_unit AND price >= last_buy_price + 0.5*ATR → buy 1 more unit, last_buy_price = price"
+  ignore: "insufficient bars (< T+1); add when add_count already at limit_unit"
+position:
+  kind: unit
+  sizing: |
+    On first entry: risk_value = net_worth * 0.01; unit_size = risk_value / ATR
+    Order notional = min(cash, unit_size * price)
+    Subsequent adds use the same unit_size stored at entry (legacy does not recalc unit on adds)
+    Max units: 4 (initial counts as 1)
+    Long-only in this pack
+stops:
+  price: "in position AND price <= last_buy_price - 2*ATR → flatten and reset state"
+  account_drawdown: none
+  halt: none
+params:
+  T: 20
+  atr_lookback: T
+  frequency: 1d
+  unit_risk_fraction: 0.01
+  add_atr_multiple: 0.5
+  stop_atr_multiple: 2.0
+  limit_unit: 4
+failure_modes:
+  - 震荡市反复假突破，通道止盈偏快（出场用 T/2）
+  - ATR 被全样本均值平滑，波动突变时单位仓滞后
+  - 单边下跌时本包只做多，空仓等待下一次上破
+  - 单位仓受现金上限截断，后段加仓可能小于 1 unit
+known_bugs:
+  - ATR 对传入 hist 全部 TR 取均值，不是标准 N 日 ATR
+  - 第一条 TR 用 close[-1] 环绕，首根 TR 偏大或无意义
+  - ETH 克隆 T=5，同一逻辑；PARAMS 与最小下单仍可能残留 BTC 常量（见 ETH 文件）
+source_kind: legacy
+legacy_files:
+  - legacy/海龟策略.py
+  - legacy/ETH-海龟策略.py
+markets_supported:
+  - crypto
+  - a_share
+  - hk
+  - us

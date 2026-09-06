@@ -1,0 +1,48 @@
+version: 1
+packs:
+  - id: turtle
+    title: 海龟
+    style: trend
+    quality: usable_skeleton
+    intent: 唐奇安突破跟随趋势，用 ATR 单位仓、加仓与止损
+    markets_supported: [crypto, a_share, hk, us]
+    path: strategies/turtle
+
+# 尚未写成策略包。实现 Agent 不要直接翻译这些文件。
+legacy_index:
+  - id: dual_thrust
+    title: Dual Thrust
+    quality: usable_skeleton
+    files: [legacy/Dual Thrust策略.py, legacy/ETH-Dual Thrust策略.py]
+  - id: ema_cross_dd
+    title: EMA 交叉 + 回撤止损
+    quality: usable_skeleton
+    files: [legacy/EMA指标策略.py, legacy/ETH-EMA指标策略.py]
+  - id: aroon
+    title: 阿隆
+    quality: usable_skeleton
+    files: [legacy/阿隆指标策略.py]
+  - id: mean_reversion
+    title: 均值回归
+    quality: usable_skeleton
+    files: [legacy/均值回归策略.py]
+  - id: cci
+    title: CCI 穿越
+    quality: usable_skeleton
+    files: [legacy/CCI指标策略.py]
+  - id: kdj
+    title: KDJ
+    quality: usable_skeleton
+    files: [legacy/KDJ指标策略.py]
+  - id: grid
+    title: 网格
+    quality: usable_skeleton
+    files: [legacy/网格交易策略.py, legacy/ETH网格交易策略.py]
+  - id: rebalance
+    title: 动态平衡
+    quality: usable_skeleton
+    files: [legacy/动态平衡策略.py]
+  - id: value_averaging
+    title: 价值平均定投
+    quality: usable_skeleton
+    files: [legacy/价值平均定投策略.py]
